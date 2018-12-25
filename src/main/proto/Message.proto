@@ -1,0 +1,8 @@
+syntax = "proto3";
+option java_outer_classname = "MessageProto";
+option java_package = "com.snow.im.module.netty.message";//指定java代码的包路径
+message Message {  
+  string id = 1;
+  string content = 2;
+  int32 type = 3;
+}

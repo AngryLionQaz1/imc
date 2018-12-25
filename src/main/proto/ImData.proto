@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package com.snow.im.module.netty.message;
+
+option java_package = "com.snow.imc.module.netty.message";//指定java代码的包路径
+option java_outer_classname = "ImProtobuf";//自定义生成java文件的名称
+
+//心跳
+message Ping{
+}
+message Login{
+    string userId=1;
+}
+message Logout{
+    string userId=1;
+}
+//用户2用户发送消息
+message User2User1{
+    string userId=1;
+    string userImg=2;
+    string userName=3;
+    string toUserId=4;
+    string toUserImg=5;
+    string toUserName=6;
+    int32 type=7;//文本信息 0、图片1、文件2、视频3
+    string content=8;
+}
+//添加好友
+message User2User2{
+    string userId=1;
+    string userImg=2;
+    string userName=3;
+    string toUserId=4;
+    string toUserImg=5;
+    string toUserName=6;
+    int32 type=7;
+}
+//同意好友请求
+message User2User3{
+    string userId=1;
+    string userImg=2;
+    string userName=3;
+    string toUserId=4;
+    string toUserImg=5;
+    string toUserName=6;
+    int32 type=7;
+}
+//创建群
+message User2User4{
+    string userId=1;
+    string userImg=2;
+    string userName=3;
+    string groupName=4;
+    string groupImg=5;
+    string groupId=6;
+}
+
+//邀请好友进群
+message User2User5{
+    string userId=1;
+    string userImg=2;
+    string userName=3;
+    string toUserId=4;
+    string toUserImg=5;
+    string toUserName=6;
+    string groupName=7;
+    string groupImg=8;
+    string groupId=9;
+}
+
+//进群
+message User2User6{
+    string userId=1;
+    string userImg=2;
+    string userName=3;
+    string groupName=7;
+    string groupImg=8;
+    string groupId=9;
+}
+
+//用户2组
+message User2Group7{
+    string userId=1;
+    string userImg=2;
+    string userName=3;
+    string groupName=4;
+    string groupImg=5;
+    string groupId=6;
+    int32 type=7;
+}
+
+
+
+message Message{
+
+    enum DataType {
+        fire = 0;
+        USER_TO_USER_1 = 1;
+        USER_TO_USER_2 = 2;
+        USER_TO_USER_3 = 3;
+        USER_TO_USER_4 = 4;
+        USER_TO_USER_5 = 5;
+        USER_TO_USER_6 = 6;
+        USER_TO_GROUP_7= 7;
+        LOGOUT=98;
+        LOGIN=99;
+        PING =100;
+    }
+    DataType type =100;
+    oneof dataMsg {
+        User2User1 user1=1;
+        User2User2 user2=2;
+        User2User3 user3=3;
+        User2User4 user4=4;
+        User2User5 user5=5;
+        User2User6 user6=6;
+        User2Group7 user7=7;
+        Logout logout=98;
+        Login login=99;
+    }
+}
+

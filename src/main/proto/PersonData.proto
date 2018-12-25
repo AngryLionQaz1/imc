@@ -1,0 +1,32 @@
+syntax = "proto2";
+package com.baidu.com.netty.protobuf;
+option java_package = "com.snow.im.module.netty.message";
+option java_outer_classname = "PersonData";
+option optimize_for = SPEED;
+message Person{
+    required string name = 1;
+    optional int32 age = 2;
+    optional bool marraied = 3;
+}
+message Teacher{
+    optional string name = 1;
+    optional float pay = 2;
+}
+message Student{
+    optional int64 id = 1;
+    optional string name = 2;
+}
+
+message Message{
+    enum DataType {
+        PERSON = 1;
+        TEACHER = 2;
+        STUDENT = 3;
+    }
+    required DataType type = 1 [default = PERSON];
+    oneof dataMsg {
+        Person person = 2;
+        Teacher teacher = 3;
+        Student stu = 4;
+    }
+}
